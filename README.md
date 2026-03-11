@@ -2,7 +2,7 @@
 
 ## English
 
-An interactive visual project built with `Three.js + TensorFlow.js + MediaPipe` (entry file: `UI.html`).
+An interactive visual project built with `Three.js + TensorFlow.js + MediaPipe` (entry file: `index.html`).
 
 ### Features
 
@@ -20,9 +20,14 @@ An interactive visual project built with `Three.js + TensorFlow.js + MediaPipe` 
     cd partical-interaction
     ```
 
-2. Open `UI.html` directly (modern browsers like Chrome/Edge are recommended).
+2. Run a local web server (required for ES Modules to load correctly without CORS errors):
+    ```bash
+    python -m http.server
+    ```
 
-3. On first run, allow camera permissions and ensure CDN resources are reachable.
+3. Open your browser and navigate to `http://localhost:8000/`.
+
+4. On first run, allow camera permissions and ensure CDN resources are reachable.
 
 ### Usage
 
@@ -47,7 +52,7 @@ For commercial use, please contact the author to obtain written permission first
 
 ## 中文
 
-一个基于 `Three.js + TensorFlow.js + MediaPipe` 的交互式视觉项目（入口文件：`UI.html`）。
+一个基于 `Three.js + TensorFlow.js + MediaPipe` 的交互式视觉项目（入口文件：`index.html`）。
 
 ### 功能简介
 
@@ -65,9 +70,14 @@ For commercial use, please contact the author to obtain written permission first
     cd partical-interaction
     ```
 
-2. 直接打开 `UI.html`（建议使用 Chrome/Edge 等现代浏览器）。
+2. 启动本地 Web 服务器 (必需的，以便加载外部 ES Modules，避免跨域错误)：
+    ```bash
+    python -m http.server
+    ```
 
-3. 首次运行请允许浏览器摄像头权限，并确保网络可访问 CDN 资源。
+3. 打开浏览器并访问 `http://localhost:8000/`.
+
+4. 首次运行请允许浏览器摄像头权限，并确保网络可访问 CDN 资源。
 
 ### 使用说明
 
