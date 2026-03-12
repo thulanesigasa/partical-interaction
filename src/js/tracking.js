@@ -122,6 +122,7 @@ function onHandResults(results) {
     const isFourFingers = isIndexOpen && isMiddleOpen && isRingOpen && isPinkyOpen;
     const isRockOn = isIndexOpen && !isMiddleOpen && !isRingOpen && isPinkyOpen;
     const isFist = !isIndexOpen && !isMiddleOpen && !isRingOpen && !isPinkyOpen;
+    const openPalm = isFourFingers;
 
     let detectedMode = 'none';
 
