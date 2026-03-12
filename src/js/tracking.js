@@ -22,9 +22,14 @@ let lastSlapTime = 0;
 
 // Callback when a "slap" gesture is detected to change shape
 let onSlapGesture = null;
+let onGestureStableModeChange = null;
 
 export function setSlapCallback(callback) {
     onSlapGesture = callback;
+}
+
+export function setStableModeCallback(callback) {
+    onGestureStableModeChange = callback;
 }
 
 export async function initCamera() {
@@ -126,6 +131,7 @@ function onHandResults(results) {
             modeFrameCounter = 0;
             isTrackingRotation = false;
             isTrackingRoll = false;
+            if (onGestureStableModeChange) onGestureStableModeChange(currentStableMode);
         }
     } else {
         modeFrameCounter = 0;

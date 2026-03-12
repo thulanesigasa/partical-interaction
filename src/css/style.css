@@ -2,7 +2,7 @@ body {
     margin: 0;
     overflow: hidden;
     background: #020205;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 #canvas-container {
@@ -41,13 +41,13 @@ body {
     z-index: 20;
     opacity: 0.8;
     border-radius: 12px;
-    border: 2px solid rgba(100, 200, 255, 0.3);
+    border: 2px solid rgba(255, 152, 0, 0.3);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .video-pip:hover {
     opacity: 1;
-    border-color: rgba(100, 200, 255, 0.8);
+    border-color: rgba(255, 152, 0, 0.8);
 }
 
 .glass-panel {
@@ -70,9 +70,9 @@ body {
 }
 
 .control-btn.active {
-    background: linear-gradient(135deg, rgba(100, 200, 255, 0.4), rgba(100, 200, 255, 0.1));
-    border: 1px solid rgba(100, 200, 255, 0.5);
-    box-shadow: 0 0 25px rgba(79, 209, 197, 0.3);
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.4), rgba(255, 152, 0, 0.1));
+    border: 1px solid rgba(255, 152, 0, 0.5);
+    box-shadow: 0 0 25px rgba(255, 152, 0, 0.3);
 }
 
 #loader-overlay {
@@ -89,7 +89,7 @@ body {
 
 .loader {
     border: 3px solid rgba(255, 255, 255, 0.1);
-    border-left-color: #00ffff;
+    border-left-color: #ff9800;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -115,7 +115,7 @@ body {
 .mode-item.active {
     opacity: 1;
     transform: scale(1.0);
-    color: #22d3ee;
+    color: #ff9800;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+    text-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
 }

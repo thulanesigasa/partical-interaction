@@ -10,12 +10,13 @@ import {
     isHandDetected,
     handInfluence,
     rotationVelocity,
-    setSlapCallback
+    setSlapCallback,
+    setStableModeCallback
 } from './tracking.js';
 
 let scene, camera, renderer, composer, controls, clock;
 let particlesMesh;
-let currentShape = 'sphere';
+let currentShape = 'I';
 let stats; // For FPS testing via CDN payload
 let isCameraVisible = true;
 
@@ -79,6 +80,23 @@ function setupEventListeners() {
         currentShape = next;
         changeShape(currentShape, camera);
         updateActiveShapeButton(currentShape);
+    });
+
+    setStableModeCallback((mode) => {
+        let nextShape = currentShape;
+        if (mode === 'rotate') { // 1 finger
+            nextShape = 'I';
+        } else if (mode === 'roll') { // 2 fingers
+            nextShape = 'heart';
+        } else if (mode === 'scale') { // 5 fingers
+            nextShape = 'success';
+        }
+
+        if (nextShape !== currentShape) {
+            currentShape = nextShape;
+            changeShape(currentShape, camera);
+            updateActiveShapeButton(currentShape);
+        }
     });
 
     // Button Listeners

@@ -186,6 +186,30 @@ function generateShapePositions(type, array) {
             y = r * Math.sin(phi) * Math.sin(theta);
             z = r * Math.cos(phi);
             if (i < CONFIG.PARTICLE_COUNT * 0.2) { x *= 0.3; y *= 0.3; z *= 0.3; }
+        } else if (type === 'I') {
+            // "I" shape: A vertical pillar/bar
+            x = (Math.random() - 0.5) * 4;
+            y = (Math.random() - 0.5) * 25;
+            z = (Math.random() - 0.5) * 4;
+        } else if (type === 'success') {
+            // "Success" shape: A checkmark
+            // Two segments: a short one going down-right, and a long one going up-right.
+            const t = Math.random();
+            const thicknessX = (Math.random() - 0.5) * 1.5;
+            const thicknessZ = (Math.random() - 0.5) * 1.5;
+            if (i < CONFIG.PARTICLE_COUNT * 0.3) {
+                // Short segment (left part of checkmark)
+                // from (-8, 0) to (-2, -6)
+                x = -8 + t * 6 + thicknessX;
+                y = 0 - t * 6 + thicknessZ;
+                z = thicknessZ;
+            } else {
+                // Long segment (right part of checkmark)
+                // from (-2, -6) to (10, 8)
+                x = -2 + t * 12 + thicknessX;
+                y = -6 + t * 14 + thicknessZ;
+                z = thicknessZ;
+            }
         } else if (type === 'heart') {
             const t = Math.PI - 2 * Math.PI * Math.random();
             const u = 2 * Math.PI * Math.random();
@@ -228,51 +252,51 @@ function generateShapePositions(type, array) {
             z = r * Math.sin(angle);
             y = (Math.random() - 0.5) * (15 - r) * 0.2;
         } else if (type === 'jellyfish') {
-            // 伞状身体部分 (25%的粒子)
+
             if (i < CONFIG.PARTICLE_COUNT * 0.25) {
                 const u = Math.random() * Math.PI * 2;
                 const v = Math.random();
                 const r = 5 * Math.sqrt(v);
                 x = r * Math.cos(u);
                 z = r * Math.sin(u);
-                // 扁平钟形伞顶，顶部较平，边缘下垂
-                const centerFlatness = Math.pow(1 - v, 2); // 中心更平坦
-                const edgeCurve = Math.pow(v, 1.5); // 边缘弧度
+
+                const centerFlatness = Math.pow(1 - v, 2);
+                const edgeCurve = Math.pow(v, 1.5);
                 y = 6 + centerFlatness * 2 - edgeCurve * 5.5;
             } else {
-                // 触手部分 (75%的粒子) - 16条触手，密集向下垂落
+
                 const tentacleCount = 16;
                 const particlesPerTentacle = (CONFIG.PARTICLE_COUNT * 0.75) / tentacleCount;
                 const tentacleIndex = Math.floor((i - CONFIG.PARTICLE_COUNT * 0.25) / particlesPerTentacle);
                 const posInTentacle = ((i - CONFIG.PARTICLE_COUNT * 0.25) % particlesPerTentacle) / particlesPerTentacle;
 
-                // 均匀分布在圆周上，稍有变化
+
                 const baseAngle = (tentacleIndex / tentacleCount) * Math.PI * 2;
                 const angleVariation = (Math.random() - 0.5) * 0.15;
                 const angle = baseAngle + angleVariation;
 
-                // 触手长度变化
+
                 const tentacleLengthVariation = 0.8 + Math.random() * 0.4;
                 const length = Math.pow(posInTentacle, 0.8) * tentacleLengthVariation;
 
-                // 很小的起始半径，让触手紧密聚拢
+
                 const radiusVariation = Math.random();
                 const startRadius = 2.5 + radiusVariation * 1;
 
-                // 微小的螺旋和弯曲效果
+
                 const spiral = Math.sin(length * Math.PI * 2 + tentacleIndex * 1.5) * (0.2 + length * 0.3);
                 const bendPhase = tentacleIndex * 0.5;
                 const bend = Math.sin(length * Math.PI * 1.2 + bendPhase) * (0.4 + length * 0.4);
 
-                // 触手几乎垂直向下，只略微向外
+
                 const radiusExpansion = startRadius + length * 0.15 + Math.abs(bend) * 0.05;
 
                 x = radiusExpansion * Math.cos(angle) + bend * Math.cos(angle + Math.PI / 4) + spiral * Math.cos(angle + Math.PI / 2);
                 z = radiusExpansion * Math.sin(angle) + bend * Math.sin(angle + Math.PI / 4) + spiral * Math.sin(angle + Math.PI / 2);
-                // 触手从伞体底部开始，主要向下延伸
+
                 y = 2 - radiusVariation * 0.3 - length * 20 - Math.abs(bend) * 0.2;
 
-                // 很小的随机扰动
+
                 x += (Math.random() - 0.5) * 0.4 * length;
                 z += (Math.random() - 0.5) * 0.4 * length;
             }

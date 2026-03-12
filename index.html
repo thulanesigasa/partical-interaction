@@ -21,6 +21,7 @@
     <!-- Add Stats.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.min.js"></script>
     <link rel="stylesheet" href="./src/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,35 +30,33 @@
 
     <div id="loader-overlay">
         <div class="loader mb-6"></div>
-        <div class="text-cyan-300 text-2xl font-bold tracking-widest uppercase">Dual System</div>
+        <div class="text-orange-400 text-2xl font-bold tracking-widest uppercase">Dual System</div>
         <div class="text-gray-500 text-xs mt-3 tracking-widest">INITIALIZING...</div>
     </div>
 
     <!-- Onboarding Overlay -->
     <div id="onboarding-overlay"
         class="hidden fixed inset-0 z-40 bg-black/90 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-500">
-        <h2 class="text-3xl font-bold text-cyan-400 mb-6 tracking-wide">Gesture Controls</h2>
+        <h2 class="text-3xl font-bold text-orange-400 mb-6 tracking-wide">Gesture Controls</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl text-left">
             <div class="glass-panel p-6 border-white/10">
                 <div class="text-4xl mb-3">👋</div>
-                <h3 class="text-xl font-bold text-white mb-2">Five Fingers</h3>
-                <p class="text-gray-400 text-sm">Hold open palm up to expand energy burst and increase turbulence.</p>
+                <h3 class="text-xl font-bold text-white mb-2">Five Fingers ('Success')</h3>
+                <p class="text-gray-400 text-sm">Hold open palm up to trigger the Success particle.</p>
             </div>
             <div class="glass-panel p-6 border-white/10">
                 <div class="text-4xl mb-3">☝️</div>
-                <h3 class="text-xl font-bold text-white mb-2">Index Finger</h3>
-                <p class="text-gray-400 text-sm">Point index finger and move to rotate the particle system in 3D space.
-                </p>
+                <h3 class="text-xl font-bold text-white mb-2">Index Finger ('I')</h3>
+                <p class="text-gray-400 text-sm">Point index finger and move to trigger the I particle.</p>
             </div>
             <div class="glass-panel p-6 border-white/10">
-                <div class="text-4xl mb-3">👋↔️👋</div>
-                <h3 class="text-xl font-bold text-white mb-2">Swipe (Slap)</h3>
-                <p class="text-gray-400 text-sm">Quickly swipe an open palm horizontally to cycle through different
-                    shapes.</p>
+                <div class="text-4xl mb-3">✌️</div>
+                <h3 class="text-xl font-bold text-white mb-2">Two Fingers ('Love')</h3>
+                <p class="text-gray-400 text-sm">Show two fingers to trigger the Love particle.</p>
             </div>
         </div>
         <button id="start-btn"
-            class="mt-10 px-8 py-3 bg-cyan-500/20 hover:bg-cyan-500/40 border border-cyan-400/50 text-cyan-300 font-bold rounded-full transition-all hover:scale-105">ENTER
+            class="mt-10 px-8 py-3 bg-orange-500/20 hover:bg-orange-500/40 border border-orange-400/50 text-orange-300 font-bold rounded-full transition-all hover:scale-105">ENTER
             EXPERIENCE</button>
     </div>
 
@@ -76,7 +75,7 @@
             <div class="glass-panel p-5">
                 <h1 class="text-white text-2xl font-bold mb-2">
                     <span id="mode-title">Particle Flow</span>
-                    <span class="text-xs text-cyan-400">v3.1 (GPU)</span>
+                    <span class="text-xs text-orange-400">v3.1 (GPU)</span>
                 </h1>
                 <div class="flex items-center gap-3 bg-black/30 rounded-full px-3 py-1 w-fit border border-white/5">
                     <div id="status-dot" class="w-2 h-2 rounded-full bg-red-500 transition-all duration-500"></div>
@@ -93,7 +92,7 @@
 
             <div class="flex flex-col gap-3 items-end">
                 <button id="fullscreen-btn"
-                    class="glass-panel p-4 text-white hover:text-cyan-300 control-btn rounded-full mb-2">
+                    class="glass-panel p-4 text-white hover:text-orange-300 control-btn rounded-full mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -101,7 +100,7 @@
                     </svg>
                 </button>
                 <button id="mode-switch-btn"
-                    class="glass-panel px-4 py-2 text-white hover:text-cyan-300 control-btn rounded-lg text-xs font-bold tracking-wide">
+                    class="glass-panel px-4 py-2 text-white hover:text-orange-300 control-btn rounded-lg text-xs font-bold tracking-wide">
                     Toggle Camera
                 </button>
             </div>
@@ -112,9 +111,13 @@
             <div class="glass-panel p-2 flex gap-2 overflow-x-auto max-w-full">
                 <button
                     class="control-btn active px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
-                    data-shape="sphere">Nebula</button>
+                    data-shape="I">I</button>
                 <button class="control-btn px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
                     data-shape="heart">Heart</button>
+                <button class="control-btn px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
+                    data-shape="success">Success</button>
+                <button class="control-btn px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
+                    data-shape="sphere">Nebula</button>
                 <button class="control-btn px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
                     data-shape="saturn">Saturn</button>
                 <button class="control-btn px-6 py-3 rounded-lg text-sm text-white font-semibold whitespace-nowrap"
@@ -138,9 +141,13 @@
             </div>
             <div class="glass-panel p-4 flex items-center gap-4">
                 <span class="text-white text-xs font-mono tracking-wider uppercase">Emission Color</span>
-                <input type="color" id="color-picker" value="#00ffff" class="w-8 h-8 rounded-full cursor-pointer">
+                <input type="color" id="color-picker" value="#ff9800" class="w-8 h-8 rounded-full cursor-pointer">
             </div>
         </div>
+    </div>
+
+    <div class="fixed bottom-2 w-full text-center pointer-events-none z-50">
+        <p class="text-xs text-orange-400 font-bold opacity-70 tracking-widest uppercase">a product of ptechsolutions</p>
     </div>
 
     <!-- Switch to standard module import without bundler -->
