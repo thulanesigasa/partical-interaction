@@ -8,7 +8,7 @@ export const CONFIG = {
 };
 
 export const SHAPES_ORDER = [
-    'I', 'heart', 'success', 'sphere', 'saturn', 'lotus', 'galaxy',
+    'I', 'Love', 'success', 'sphere', 'saturn', 'lotus', 'galaxy',
     'jellyfish', 'torus', 'tornado', 'doublehelix',
     'cube', 'butterfly', 'peachblossom'
 ];

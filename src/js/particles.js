@@ -186,30 +186,16 @@ function generateShapePositions(type, array) {
             y = r * Math.sin(phi) * Math.sin(theta);
             z = r * Math.cos(phi);
             if (i < CONFIG.PARTICLE_COUNT * 0.2) { x *= 0.3; y *= 0.3; z *= 0.3; }
-        } else if (type === 'I') {
-            // "I" shape: A vertical pillar/bar
-            x = (Math.random() - 0.5) * 4;
-            y = (Math.random() - 0.5) * 25;
-            z = (Math.random() - 0.5) * 4;
-        } else if (type === 'success') {
-            // "Success" shape: A checkmark
-            // Two segments: a short one going down-right, and a long one going up-right.
-            const t = Math.random();
-            const thicknessX = (Math.random() - 0.5) * 1.5;
-            const thicknessZ = (Math.random() - 0.5) * 1.5;
-            if (i < CONFIG.PARTICLE_COUNT * 0.3) {
-                // Short segment (left part of checkmark)
-                // from (-8, 0) to (-2, -6)
-                x = -8 + t * 6 + thicknessX;
-                y = 0 - t * 6 + thicknessZ;
-                z = thicknessZ;
-            } else {
-                // Long segment (right part of checkmark)
-                // from (-2, -6) to (10, 8)
-                x = -2 + t * 12 + thicknessX;
-                y = -6 + t * 14 + thicknessZ;
-                z = thicknessZ;
-            }
+        } else if (type === 'I' || type === 'Love' || type === 'success') {
+            let textToRender = 'I';
+            if (type === 'Love') textToRender = 'Love';
+            if (type === 'success') textToRender = 'Success';
+
+            const pixels = getTextPixels(textToRender);
+            const p = pixels[i % pixels.length];
+            x = p.x + (Math.random() - 0.5) * 0.4;
+            y = p.y + (Math.random() - 0.5) * 0.4;
+            z = (Math.random() - 0.5) * 1.5;
         } else if (type === 'heart') {
             const t = Math.PI - 2 * Math.PI * Math.random();
             const u = 2 * Math.PI * Math.random();
@@ -401,4 +387,34 @@ function generateShapeColors(type, array) {
             array[i * 3 + 2] = brightness;
         }
     }
+}
+
+const textCache = {};
+function getTextPixels(text) {
+    if (textCache[text]) return textCache[text];
+    const canvas = document.createElement('canvas');
+    canvas.width = 1200;
+    canvas.height = 400;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = 'bold 160px "Outfit", sans-serif';
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const pixels = [];
+    for (let y = 0; y < canvas.height; y += 3) {
+        for (let x = 0; x < canvas.width; x += 3) {
+            const i = (y * canvas.width + x) * 4;
+            if (data[i] > 128) {
+                pixels.push({ x: (x - canvas.width / 2) / 10, y: -(y - canvas.height / 2) / 10 });
+            }
+        }
+    }
+    if (pixels.length === 0) pixels.push({ x: 0, y: 0 });
+    textCache[text] = pixels;
+    return pixels;
 }

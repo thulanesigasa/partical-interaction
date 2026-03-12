@@ -87,7 +87,7 @@ function setupEventListeners() {
         if (mode === 'rotate') { // 1 finger
             nextShape = 'I';
         } else if (mode === 'roll') { // 2 fingers
-            nextShape = 'heart';
+            nextShape = 'Love';
         } else if (mode === 'scale') { // 5 fingers
             nextShape = 'success';
         }
