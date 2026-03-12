@@ -115,25 +115,28 @@ function onHandResults(results) {
     const isPinkyOpen = getDist(20, 0) > getDist(18, 0) * 1.1;
 
     const openCount = [isIndexOpen, isMiddleOpen, isRingOpen, isPinkyOpen].filter(Boolean).length;
-    const isPinch = getDist(8, 4) < 0.08 && !isMiddleOpen && !isRingOpen && !isPinkyOpen;
-    const isFist = openCount === 0;
-    const isThreeFingers = openCount === 3 && isIndexOpen && isMiddleOpen && isRingOpen;
-    const openPalm = openCount === 4;
+
+    const isOnlyIndex = isIndexOpen && !isMiddleOpen && !isRingOpen && !isPinkyOpen;
+    const isIndexAndMiddle = isIndexOpen && isMiddleOpen && !isRingOpen && !isPinkyOpen;
+    const isThreeFingers = isIndexOpen && isMiddleOpen && isRingOpen && !isPinkyOpen;
+    const isFourFingers = isIndexOpen && isMiddleOpen && isRingOpen && isPinkyOpen;
+    const isRockOn = isIndexOpen && !isMiddleOpen && !isRingOpen && isPinkyOpen;
+    const isFist = !isIndexOpen && !isMiddleOpen && !isRingOpen && !isPinkyOpen;
 
     let detectedMode = 'none';
 
-    // Assign higher priority to motions to avoid accidental shape triggers while moving fingers
-    if (isPinch) {
-        detectedMode = 'rotate';
-    } else if (isFist) {
-        detectedMode = 'roll';
-    } else if (isThreeFingers) {
+    // Assign modes based on simple isolated finger states
+    if (isFist) {
         detectedMode = 'scale';
-    } else if (openCount === 1 && isIndexOpen) {
+    } else if (isThreeFingers) {
+        detectedMode = 'rotate';
+    } else if (isRockOn) {
+        detectedMode = 'roll';
+    } else if (isOnlyIndex) {
         detectedMode = 'shape_i';
-    } else if (openCount === 2 && isIndexOpen && isMiddleOpen) {
+    } else if (isIndexAndMiddle) {
         detectedMode = 'shape_love';
-    } else if (openCount >= 3 && isPinkyOpen) {
+    } else if (isFourFingers) {
         detectedMode = 'shape_success';
     }
 
