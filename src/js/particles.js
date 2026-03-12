@@ -382,9 +382,9 @@ function generateShapeColors(type, array) {
             array[i * 3 + 1] = 0.7 * brightness;
             array[i * 3 + 2] = 0.3 * brightness;
         } else {
-            array[i * 3] = brightness;
-            array[i * 3 + 1] = brightness;
-            array[i * 3 + 2] = brightness;
+            array[i * 3] = 1.0 * brightness;
+            array[i * 3 + 1] = 0.596 * brightness; // ~152/255 for orange
+            array[i * 3 + 2] = 0.0 * brightness;
         }
     }
 }

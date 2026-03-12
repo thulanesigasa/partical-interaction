@@ -113,15 +113,28 @@ function onHandResults(results) {
     const isMiddleOpen = getDist(12, 0) > getDist(10, 0) * 1.1;
     const isRingOpen = getDist(16, 0) > getDist(14, 0) * 1.1;
     const isPinkyOpen = getDist(20, 0) > getDist(18, 0) * 1.1;
-    const openPalm = isIndexOpen && isMiddleOpen && isRingOpen && isPinkyOpen;
 
-    let detectedMode = 'scale';
-    if (isRingOpen || isPinkyOpen) {
-        detectedMode = 'scale';
-    } else if (isIndexOpen && isMiddleOpen) {
-        detectedMode = 'roll';
-    } else if (isIndexOpen && !isMiddleOpen) {
+    const openCount = [isIndexOpen, isMiddleOpen, isRingOpen, isPinkyOpen].filter(Boolean).length;
+    const isPinch = getDist(8, 4) < 0.08 && !isMiddleOpen && !isRingOpen && !isPinkyOpen;
+    const isFist = openCount === 0;
+    const isThreeFingers = openCount === 3 && isIndexOpen && isMiddleOpen && isRingOpen;
+    const openPalm = openCount === 4;
+
+    let detectedMode = 'none';
+
+    // Assign higher priority to motions to avoid accidental shape triggers while moving fingers
+    if (isPinch) {
         detectedMode = 'rotate';
+    } else if (isFist) {
+        detectedMode = 'roll';
+    } else if (isThreeFingers) {
+        detectedMode = 'scale';
+    } else if (openCount === 1 && isIndexOpen) {
+        detectedMode = 'shape_i';
+    } else if (openCount === 2 && isIndexOpen && isMiddleOpen) {
+        detectedMode = 'shape_love';
+    } else if (openCount >= 3 && isPinkyOpen) {
+        detectedMode = 'shape_success';
     }
 
     if (detectedMode !== currentStableMode) {
@@ -140,18 +153,19 @@ function onHandResults(results) {
     updateActiveGestureMode(currentStableMode);
 
     if (currentStableMode === 'roll') {
-        const rawIndex = landmarks[8];
-        const rawMiddle = landmarks[12];
+        const idxKnuckle = landmarks[5]; // Index MCP
+        const pinkyKnuckle = landmarks[17]; // Pinky MCP
+
         if (!isTrackingRoll) {
-            smoothedIndexTip = { x: rawIndex.x, y: rawIndex.y };
-            smoothedMiddleTip = { x: rawMiddle.x, y: rawMiddle.y };
-            previousRollAngle = Math.atan2(rawIndex.y - rawMiddle.y, rawIndex.x - rawMiddle.x);
+            smoothedIndexTip = { x: idxKnuckle.x, y: idxKnuckle.y };
+            smoothedMiddleTip = { x: pinkyKnuckle.x, y: pinkyKnuckle.y };
+            previousRollAngle = Math.atan2(idxKnuckle.y - pinkyKnuckle.y, idxKnuckle.x - pinkyKnuckle.x);
             isTrackingRoll = true;
         } else {
-            smoothedIndexTip.x = THREE.MathUtils.lerp(smoothedIndexTip.x, rawIndex.x, 0.2);
-            smoothedIndexTip.y = THREE.MathUtils.lerp(smoothedIndexTip.y, rawIndex.y, 0.2);
-            smoothedMiddleTip.x = THREE.MathUtils.lerp(smoothedMiddleTip.x, rawMiddle.x, 0.2);
-            smoothedMiddleTip.y = THREE.MathUtils.lerp(smoothedMiddleTip.y, rawMiddle.y, 0.2);
+            smoothedIndexTip.x = THREE.MathUtils.lerp(smoothedIndexTip.x, idxKnuckle.x, 0.2);
+            smoothedIndexTip.y = THREE.MathUtils.lerp(smoothedIndexTip.y, idxKnuckle.y, 0.2);
+            smoothedMiddleTip.x = THREE.MathUtils.lerp(smoothedMiddleTip.x, pinkyKnuckle.x, 0.2);
+            smoothedMiddleTip.y = THREE.MathUtils.lerp(smoothedMiddleTip.y, pinkyKnuckle.y, 0.2);
         }
         const currentAngle = Math.atan2(smoothedIndexTip.y - smoothedMiddleTip.y, smoothedIndexTip.x - smoothedMiddleTip.x);
         let deltaAngle = currentAngle - previousRollAngle;
@@ -210,7 +224,7 @@ function onHandResults(results) {
 
 function updateActiveGestureMode(mode) {
     if (!document.getElementById(`mode-${mode}`)) return;
-    ['mode-scale', 'mode-rotate', 'mode-roll'].forEach(id => {
+    ['mode-scale', 'mode-rotate', 'mode-roll', 'mode-shape_i', 'mode-shape_love', 'mode-shape_success'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.remove('active');
     });

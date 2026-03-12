@@ -84,11 +84,11 @@ function setupEventListeners() {
 
     setStableModeCallback((mode) => {
         let nextShape = currentShape;
-        if (mode === 'rotate') { // 1 finger
+        if (mode === 'shape_i') {
             nextShape = 'I';
-        } else if (mode === 'roll') { // 2 fingers
+        } else if (mode === 'shape_love') {
             nextShape = 'Love';
-        } else if (mode === 'scale') { // 5 fingers
+        } else if (mode === 'shape_success') {
             nextShape = 'success';
         }
 

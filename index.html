@@ -38,21 +38,36 @@
     <div id="onboarding-overlay"
         class="hidden fixed inset-0 z-40 bg-black/90 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-500">
         <h2 class="text-3xl font-bold text-orange-400 mb-6 tracking-wide">Gesture Controls</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl text-left">
-            <div class="glass-panel p-6 border-white/10">
-                <div class="text-4xl mb-3">👋</div>
-                <h3 class="text-xl font-bold text-white mb-2">Five Fingers ('Success')</h3>
-                <p class="text-gray-400 text-sm">Hold open palm up to trigger the Success particle.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl text-left">
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">☝️</div>
+                <h3 class="text-md font-bold text-white mb-1">Index Finger</h3>
+                <p class="text-gray-400 text-xs">Switch shape to "I"</p>
             </div>
-            <div class="glass-panel p-6 border-white/10">
-                <div class="text-4xl mb-3">☝️</div>
-                <h3 class="text-xl font-bold text-white mb-2">Index Finger ('I')</h3>
-                <p class="text-gray-400 text-sm">Point index finger and move to trigger the I particle.</p>
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">✌️</div>
+                <h3 class="text-md font-bold text-white mb-1">Two Fingers</h3>
+                <p class="text-gray-400 text-xs">Switch shape to "Love"</p>
             </div>
-            <div class="glass-panel p-6 border-white/10">
-                <div class="text-4xl mb-3">✌️</div>
-                <h3 class="text-xl font-bold text-white mb-2">Two Fingers ('Love')</h3>
-                <p class="text-gray-400 text-sm">Show two fingers to trigger the Love particle.</p>
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">👋</div>
+                <h3 class="text-md font-bold text-white mb-1">Open Palm</h3>
+                <p class="text-gray-400 text-xs">Switch shape to "Success"</p>
+            </div>
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">🤏</div>
+                <h3 class="text-md font-bold text-white mb-1">Pinch</h3>
+                <p class="text-gray-400 text-xs">Rotate the particle view</p>
+            </div>
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">✊</div>
+                <h3 class="text-md font-bold text-white mb-1">Fist</h3>
+                <p class="text-gray-400 text-xs">Roll the particle plane</p>
+            </div>
+            <div class="glass-panel p-4 border-white/10">
+                <div class="text-3xl mb-2">🤟</div>
+                <h3 class="text-md font-bold text-white mb-1">Three Fingers</h3>
+                <p class="text-gray-400 text-xs">Trigger energy burst</p>
             </div>
         </div>
         <button id="start-btn"
@@ -84,9 +99,12 @@
                 </div>
                 <div id="gesture-modes"
                     class="text-[10px] text-gray-400 mt-3 font-mono border-t border-white/10 pt-2 transition-opacity">
-                    <div id="mode-scale" class="mode-item">👋 Five Fingers: Energy Burst (Scale)</div>
-                    <div id="mode-rotate" class="mode-item">☝️ Index Finger: View Rotation</div>
-                    <div id="mode-roll" class="mode-item">✌️ Two Fingers: Plane Roll</div>
+                    <div id="mode-scale" class="mode-item">🤟 Three Fingers: Energy Burst</div>
+                    <div id="mode-rotate" class="mode-item">🤏 Pinch: View Rotation</div>
+                    <div id="mode-roll" class="mode-item">✊ Fist: Plane Roll</div>
+                    <div id="mode-shape_i" class="mode-item">☝️ One Finger: "I"</div>
+                    <div id="mode-shape_love" class="mode-item">✌️ Two Fingers: "Love"</div>
+                    <div id="mode-shape_success" class="mode-item">👋 Open Palm: "Success"</div>
                 </div>
             </div>
 
