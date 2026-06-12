@@ -9,7 +9,6 @@ const clock = new THREE.Clock();
 
 export function initScene() {
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020205, 0.02);
 
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 30;
