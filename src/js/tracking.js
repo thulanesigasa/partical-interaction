@@ -128,17 +128,15 @@ function onHandResults(results) {
 
     // Assign modes based on simple isolated finger states
     if (isFist) {
-        detectedMode = 'scale';
-    } else if (isThreeFingers) {
         detectedMode = 'rotate';
-    } else if (isRockOn) {
-        detectedMode = 'roll';
-    } else if (isOnlyIndex) {
-        detectedMode = 'shape_i';
-    } else if (isIndexAndMiddle) {
-        detectedMode = 'shape_love';
     } else if (isFourFingers) {
-        detectedMode = 'shape_success';
+        detectedMode = 'scale'; // Energy Burst
+    } else if (isRockOn) {
+        detectedMode = 'roll'; // Hand Movement
+    } else if (isOnlyIndex) {
+        detectedMode = 'shape_basani';
+    } else if (isIndexAndMiddle) {
+        detectedMode = 'shape_mageza';
     }
 
     if (detectedMode !== currentStableMode) {
@@ -228,7 +226,7 @@ function onHandResults(results) {
 
 function updateActiveGestureMode(mode) {
     if (!document.getElementById(`mode-${mode}`)) return;
-    ['mode-scale', 'mode-rotate', 'mode-roll', 'mode-shape_i', 'mode-shape_love', 'mode-shape_success'].forEach(id => {
+    ['mode-scale', 'mode-rotate', 'mode-roll', 'mode-shape_basani', 'mode-shape_mageza'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.remove('active');
     });

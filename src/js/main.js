@@ -16,7 +16,7 @@ import {
 
 let scene, camera, renderer, composer, controls, clock;
 let particlesMesh;
-let currentShape = 'I';
+let currentShape = 'Basani';
 let stats; // For FPS testing via CDN payload
 let isCameraVisible = true;
 
@@ -84,12 +84,10 @@ function setupEventListeners() {
 
     setStableModeCallback((mode) => {
         let nextShape = currentShape;
-        if (mode === 'shape_i') {
-            nextShape = 'I';
-        } else if (mode === 'shape_love') {
-            nextShape = 'Love';
-        } else if (mode === 'shape_success') {
-            nextShape = 'success';
+        if (mode === 'shape_basani') {
+            nextShape = 'Basani';
+        } else if (mode === 'shape_mageza') {
+            nextShape = 'Mageza';
         }
 
         if (nextShape !== currentShape) {
@@ -120,6 +118,10 @@ function setupEventListeners() {
         if (videoEl) {
             videoEl.style.display = isCameraVisible ? 'block' : 'none';
         }
+    });
+
+    document.getElementById('theme-switch-btn').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
     });
 }
 

@@ -1,8 +1,30 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --text-muted: #666666;
+    --accent-color: #ec4899;
+    --accent-glow: rgba(236, 72, 153, 0.4);
+    --panel-bg: rgba(255, 255, 255, 0.8);
+    --panel-border: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+    --bg-color: #020205;
+    --text-color: #ffffff;
+    --text-muted: #9ca3af;
+    --accent-color: #ec4899;
+    --accent-glow: rgba(236, 72, 153, 0.4);
+    --panel-bg: rgba(10, 10, 20, 0.7);
+    --panel-border: rgba(255, 255, 255, 0.08);
+}
+
 body {
     margin: 0;
     overflow: hidden;
-    background: #020205;
+    background: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Outfit', sans-serif;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
 #canvas-container {
@@ -41,21 +63,21 @@ body {
     z-index: 20;
     opacity: 0.8;
     border-radius: 12px;
-    border: 2px solid rgba(255, 152, 0, 0.3);
+    border: 2px solid var(--accent-glow);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .video-pip:hover {
     opacity: 1;
-    border-color: rgba(255, 152, 0, 0.8);
+    border-color: var(--accent-color);
 }
 
 .glass-panel {
-    background: rgba(10, 10, 20, 0.7);
+    background: var(--panel-bg);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--panel-border);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .control-btn {
@@ -70,9 +92,9 @@ body {
 }
 
 .control-btn.active {
-    background: linear-gradient(135deg, rgba(255, 152, 0, 0.4), rgba(255, 152, 0, 0.1));
-    border: 1px solid rgba(255, 152, 0, 0.5);
-    box-shadow: 0 0 25px rgba(255, 152, 0, 0.3);
+    background: linear-gradient(135deg, var(--accent-glow), transparent);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 25px var(--accent-glow);
 }
 
 #loader-overlay {
@@ -88,8 +110,8 @@ body {
 }
 
 .loader {
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-left-color: #ff9800;
+    border: 3px solid var(--panel-border);
+    border-left-color: var(--accent-color);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -110,12 +132,13 @@ body {
     transition: all 0.2s ease;
     opacity: 0.4;
     transform: scale(0.95);
+    color: var(--text-color);
 }
 
 .mode-item.active {
     opacity: 1;
     transform: scale(1.0);
-    color: #ff9800;
+    color: var(--accent-color);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+    text-shadow: 0 0 10px var(--accent-glow);
 }

@@ -67,8 +67,8 @@ export function createParticles() {
     const positions = new Float32Array(CONFIG.PARTICLE_COUNT * 3);
     const colors = new Float32Array(CONFIG.PARTICLE_COUNT * 3);
 
-    generateShapePositions('I', positions);
-    generateShapeColors('I', colors);
+    generateShapePositions('Basani', positions);
+    generateShapeColors('Basani', colors);
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('targetPosition', new THREE.BufferAttribute(positions, 3));
@@ -178,9 +178,8 @@ function createParticleTexture() {
 function generateShapePositions(type, array) {
     for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
         let x, y, z;
-        let textToRender = 'I';
-        if (type === 'Love') textToRender = 'Love';
-        else if (type === 'success') textToRender = 'Success';
+        let textToRender = 'Basani';
+        if (type === 'Mageza') textToRender = 'Mageza';
 
         const pixels = getTextPixels(textToRender);
         const p = pixels[i % pixels.length];
@@ -196,9 +195,9 @@ function generateShapePositions(type, array) {
 function generateShapeColors(type, array) {
     for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
         const brightness = 0.2 + Math.random() * 0.8;
-        array[i * 3] = 1.0 * brightness;
-        array[i * 3 + 1] = 0.596 * brightness; // ~152/255 for orange
-        array[i * 3 + 2] = 0.0 * brightness;
+        array[i * 3] = 0.925 * brightness;     // 236/255
+        array[i * 3 + 1] = 0.282 * brightness; // 72/255
+        array[i * 3 + 2] = 0.600 * brightness; // 153/255
     }
 }
 

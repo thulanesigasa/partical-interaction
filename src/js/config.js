@@ -8,5 +8,5 @@ export const CONFIG = {
 };
 
 export const SHAPES_ORDER = [
-    'I', 'Love', 'success'
+    'Basani', 'Mageza'
 ];
