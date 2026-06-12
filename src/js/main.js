@@ -16,7 +16,7 @@ import {
 
 let scene, camera, renderer, composer, controls, clock;
 let particlesMesh;
-let currentShape = 'Basani';
+let currentShape = 'HEY';
 let stats; // For FPS testing via CDN payload
 let isCameraVisible = true;
 

@@ -67,8 +67,8 @@ export function createParticles() {
     const positions = new Float32Array(CONFIG.PARTICLE_COUNT * 3);
     const colors = new Float32Array(CONFIG.PARTICLE_COUNT * 3);
 
-    generateShapePositions('Basani', positions);
-    generateShapeColors('Basani', colors);
+    generateShapePositions('HEY', positions);
+    generateShapeColors('HEY', colors);
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('targetPosition', new THREE.BufferAttribute(positions, 3));
@@ -178,8 +178,9 @@ function createParticleTexture() {
 function generateShapePositions(type, array) {
     for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
         let x, y, z;
-        let textToRender = 'Basani';
-        if (type === 'Mageza') textToRender = 'Mageza';
+        let textToRender = 'HEY';
+        if (type === 'Basani') textToRender = 'Basani';
+        else if (type === 'Mageza') textToRender = 'Mageza';
 
         const pixels = getTextPixels(textToRender);
         const p = pixels[i % pixels.length];
